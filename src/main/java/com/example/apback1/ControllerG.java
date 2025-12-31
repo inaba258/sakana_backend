@@ -17,14 +17,12 @@ public class ControllerG {
 
     @GetMapping("/search")
     public Hojinreceive getSearch(@RequestParam String name, @RequestParam int page) {
-        System.out.println("Androidから検索が来た！ 名前: " + name + " ページ: " + page);
 
         return serviceG.searcher(name, page);
     }
 
     @GetMapping("/detail/{bango}")
-    public Hojinreceive getOne(@PathVariable String bango) {
-        System.out.println("詳細が見たいらしい！ 番号: " + bango);
+    public Hojinreceive getOne(@PathVariable String bango) {;
 
         return serviceG.onecompany(bango);
     }

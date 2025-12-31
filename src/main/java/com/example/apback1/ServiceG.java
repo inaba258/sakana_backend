@@ -20,10 +20,10 @@ public class ServiceG {
         String encodedName = java.net.URLEncoder.encode(companyName, java.nio.charset.StandardCharsets.UTF_8);
 
         System.out.println("今使っているトークンの先頭: " + gbizNoToken.substring(0, 5));
-        String uriPath = "v2/hojin?name=" + encodedName + "&page=" + pageNo;// + "&limit ;
+        String uriPath = "v2/hojin?name={name}&page={page}";// + "&limit ;
 
         Hojinreceive kekka = client.get()
-                .uri(uriPath)
+                .uri(uriPath, companyName, pageNo)
                 .header("X-hojinInfo-api-token", gbizNoToken)
                 .retrieve()
                 .body(Hojinreceive.class);
