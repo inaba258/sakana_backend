@@ -13,17 +13,23 @@ public class ServiceG {
 
     public ServiceG(RestClient.Builder builder) {
         this.client = builder
-                .baseUrl("https://info.gbiz.go.jp/hojin/v1")//v2 tokamo
+                .baseUrl("https://trial.api.info.gbiz.go.jp/hojin/")//trial=2gatsu
                 .build();
     }
     public Hojinreceive searcher(String companyName, int pageNo) {
-        String url = "/hojin?name=" + companyName + "&limit=20&page=" + pageNo; //1520増やしてもええかも
+        String encodedName = java.net.URLEncoder.encode(companyName, java.nio.charset.StandardCharsets.UTF_8);
+
+        System.out.println("今使っているトークンの先頭: " + gbizNoToken.substring(0, 5));
+        String uriPath = "v2/hojin?name=" + encodedName + "&page=" + pageNo;// + "&limit ;
 
         Hojinreceive kekka = client.get()
-                .uri(url)
+                .uri(uriPath)
                 .header("X-hojinInfo-api-token", gbizNoToken)
                 .retrieve()
                 .body(Hojinreceive.class);
+
+
+
 
        // if (kekka == null) {
 
@@ -34,7 +40,7 @@ public class ServiceG {
 
     public Hojinreceive onecompany(String hojinBango) {
 
-        String urlPath = "/hojin/" + hojinBango;
+        String urlPath = "v2/hojin" + hojinBango;
 
         Hojinreceive syosaiData = client.get()
                 .uri(urlPath)

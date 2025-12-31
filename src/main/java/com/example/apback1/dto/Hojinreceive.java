@@ -2,8 +2,6 @@ package com.example.apback1.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-
-import javax.swing.*;
 import java.util.List;
 
 @Data
